@@ -1,6 +1,8 @@
 
 public class Fila {
 	
-	Public Fila
+	public Fila(){
+		
+	}
 
 }
