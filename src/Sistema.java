@@ -22,8 +22,6 @@ public class Sistema {
 		//Servidor
 		servidor = new Servidor(3,7);	
 		
-
-		
 		while(tempoDecorrido <= tempoSimulacao){
 			tempoDecorrido +=1;	
 				
@@ -35,15 +33,16 @@ public class Sistema {
 					Ocupado: Escalone evento “colocar freguês na fila”
 			*/
 			if (fila1.getProximaChegada() == tempoDecorrido){
-				printEvento("Chegada", tempoDecorrido);
+				
 				fila1.setProximaChegada(tempoDecorrido);
+				fila1.addCliente(tempoDecorrido);
+				printEvento("Chegada", tempoDecorrido, 1);
 				
 				if(servidor.livre()){
 					// O tempo de 'término de serviço' é calculado dentro de atender()
 					servidor.atender(tempoDecorrido);
 					fila1.atendeCliente();
-				} else {
-					fila1.addCliente(tempoDecorrido);
+					printEvento("Saida", tempoDecorrido, 1);
 				}
 			} 
 			
@@ -54,21 +53,17 @@ public class Sistema {
 					Escalone término de serviço (randômico entre 3 e 7)
 				Ocupado: Escalone evento “colocar freguês na fila”
 			 */
-			
 			if (fila2.getProximaChegada() == tempoDecorrido){
-				printEvento("Chegada", tempoDecorrido);
-
 				fila2.setProximaChegada(tempoDecorrido);
-				//TODO VERIFICAR SE É PRECISO CHECAR SE A FILA 1 TEM GENTE
+				fila2.addCliente(tempoDecorrido);
+				printEvento("Chegada", tempoDecorrido, 2);
 				if(servidor.livre() && fila1.getQtdClientes()==0){
 					// O tempo de 'término de serviço' é calculado dentro de atender()
 					servidor.atender(tempoDecorrido);
 					fila2.atendeCliente();
-				} else {
-					fila1.addCliente(tempoDecorrido);
+					printEvento("Saida", tempoDecorrido, 2);
 				}
 			}
-			
 			
 			/* Término de serviço
 				1-Teste estado das filas de espera
@@ -79,52 +74,46 @@ public class Sistema {
 			*/
 			
 			if(servidor.getTempoServico() == tempoDecorrido){
-				printEvento("Saída", tempoDecorrido);
 				if(fila1.getQtdClientes()==0 && fila2.getQtdClientes()==0){
 					servidor.teminarAtendimento();
 				} else if(fila1.getQtdClientes() > 0){
 					// O tempo de 'término de serviço' é calculado dentro de atender()
 					servidor.atender(tempoDecorrido);
 					fila1.atendeCliente();
+					printEvento("Saída", tempoDecorrido, 1);
 				} else if(fila2.getQtdClientes() > 0){
 					// O tempo de 'término de serviço' é calculado dentro de atender()
 					servidor.atender(tempoDecorrido);
 					fila2.atendeCliente();
+					printEvento("Saída", tempoDecorrido, 2);
 				}
 			}
-			
 			
 			if(servidor.livre()){
 				if(fila1.getQtdClientes() > 0){
-					// O tempo de 'término de serviço' é calculado dentro de atender()
 					servidor.atender(tempoDecorrido);
+					printEvento("Saída", tempoDecorrido, 1); // se der algum erro na execução, inverter essa linha com a de baixo.
 					fila1.atendeCliente();
 				} else if(fila2.getQtdClientes() > 0){
-					// O tempo de 'término de serviço' é calculado dentro de atender()
 					servidor.atender(tempoDecorrido);
+					printEvento("Saída", tempoDecorrido, 2); // se der algum erro na execução, inverter essa linha com a de baixo.
 					fila2.atendeCliente();
-				}
-			}
-			
-			
-		} 
-			
+				}	
+			} 
+		}
 	}
 	
-	
-	private static void printEvento(String evento, int tempoDecorrido){
+	private static void printEvento(String evento, int tempoDecorrido, int elementoNoServico){
 		/*Tipo de evento: Chegada/Saída, Momento do evento: Z
 		Elementos na Fila 1: X
 		Elementos na Fila 2: Y
 		Elemento no serviço: A
 	*/
 		System.out.println("Tipo de evento: " + evento +", Momento do evento: " + tempoDecorrido);
-		System.out.println("Elementos na Fila 1:" + fila1.getQtdClientes());
-		System.out.println("Elementos na Fila 2:" + fila1.getQtdClientes());
+		System.out.println("Elementos na Fila 1: " + fila1.getQtdClientes());
+		System.out.println("Elementos na Fila 2: " + fila2.getQtdClientes());
 		// TODO Não entendi esse
-		System.out.println("Elemento no serviço:" );
+		System.out.println("Elemento no serviço: " + elementoNoServico);
 		System.out.println("------------------------------------------------------" );
-
 	}
-
 }
