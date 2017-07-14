@@ -1,0 +1,35 @@
+Tipo de evento: Chegada, Momento do evento: 2
+Elementos na Fila 1: 0
+Elementos na Fila 2: 1
+Elemento no serviço: 2
+------------------------------------------------------
+Tipo de evento: Saida, Momento do evento: 2
+Elementos na Fila 1: 0
+Elementos na Fila 2: 0
+Elemento no serviço: 2
+------------------------------------------------------
+Tipo de evento: Chegada, Momento do evento: 6
+Elementos na Fila 1: 0
+Elementos na Fila 2: 1
+Elemento no serviço: 2
+------------------------------------------------------
+Tipo de evento: Chegada, Momento do evento: 9
+Elementos na Fila 1: 1
+Elementos na Fila 2: 1
+Elemento no serviço: 1
+------------------------------------------------------
+Tipo de evento: Saída, Momento do evento: 9
+Elementos na Fila 1: 0
+Elementos na Fila 2: 1
+Elemento no serviço: 1
+------------------------------------------------------
+Tipo de evento: Chegada, Momento do evento: 10
+Elementos na Fila 1: 0
+Elementos na Fila 2: 2
+Elemento no serviço: 2
+------------------------------------------------------
+Tipo de evento: Chegada, Momento do evento: 11
+Elementos na Fila 1: 1
+Elementos na Fila 2: 2
+Elemento no serviço: 1
+------------------------------------------------------
