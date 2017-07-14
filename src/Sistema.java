@@ -143,6 +143,7 @@ public class Sistema {
 	private static void encerraEscrita() throws IOException {
 		//Fechando conexão e escrita do arquivo.
 		writer.close();
+		System.out.println("A saída foi salva no arquivo " + caminho_arquivo);
 	}
 	
 }
